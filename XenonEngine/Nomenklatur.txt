@@ -8,11 +8,24 @@ Nomenklatur aller Elemten der XenonEngine
 	- Structs beginnen mit einem großen XS gefolgt vom Namen (bsp. XSInitData)
 	- Header- und Quelldateien von Structs werden wie die Struktur geschrieben (bsp. Struktur: XSInitData, Datei: XSInitData.hpp)
 	1.1 Member
-		- Private Member beginnen mit m_ gefolgt von einem Kürzel des Types gefolgt vom Namen der Camelnotation folgend (bsp. m_bIsRunning)
-		- Öffentliche Member beginnen mit _ gefolgt von einem Kürzel des Types gefolgt vom Namen der Camelnotation folgend (bsp _bIsActiv)
+		- Private Member beginnen mit mit dem Namen der Camelnotation folgend und enden mit _ (bsp. isRunning_)
+		- Öffentliche Member beginnen mit Namen der Camelnotation folgend (bsp isActiv)
 	1.2 Methoden
-		- Öffentliche Methoden folgen der Camelnotation mit dem ersten Teil des Namens kleingeschrieben (bsp. initEventHandler)
+		- Öffentliche Methoden folgen der Camelnotation mit dem ersten Teil des Namens kleingeschrieben (bsp. initializeEventHandler)
 		- Private Methoden beginnen mit p_ und folgen der Camelnotation mit dem ersten Teil des Namens kleingeschrieben (bsp. p_processTransform)
 2.0 Makros
-	- Makros beginnen mit X_ gefolgt vom großgeschriebenen Namen. Einzelne Wörter werden mit _ getrennt (bsp. X_BUFFER_MAX)
+	- Makros beginnen mit X gefolgt vom großgeschriebenen Namen. Einzelne Wörter werden mit _ getrennt (bsp. XBUFFER_MAX)
+3.0 Funktionen
+	- Funktionen folgen der Camelnotation beginnend mit dem ersten Wort kleingeschrieben (bsp. accessDatabase())
+4.0 Exceptions
+	- Exceptions beginnen mit XEXC_ gefolgt vom Namen der Exception folgend der Camelnotation (bsp. EXEC_NullPointer)
+5.0 Benutzerdefinierte Typen
+	- Benutzerdefinierte Typen beginnen mit X gefolgt vom Namen und _t (bsp. XBool_t);
+	- Benutzerdefinierte Typen mit speziellen größen beginnen mit X gefolgt vom Namen, der Bitzahl und _t (bsp. XUint32_t, XInt32_t)
+6.0 Enumeration
+	- Enumeration beginnen mit XE gefolgt vom Namen der Enumeration der Camelnotation folgend(bsp. XEColors)
+	- Werte einer Enumeration beginnen mit dem Namen der Enumeration gefolgt von einem _ und 
+		dem Namen des Wertes (Plural wird zu Singular) in Großbuchstaben (bsp. Enum: XEColors, Wert: COLOR_RED)
+7.0 Dateien
+	- Dateien die keinen Inhalt haben, nachdem sie benannt werden können (wie z.B. Klassen), beginnen mit xe gefolgt vom Namen (bsp. xeHeader.hpp)
 
