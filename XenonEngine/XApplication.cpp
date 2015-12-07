@@ -2,6 +2,7 @@
 
 XApplication * g_pApplication = nullptr;
 
+///////////////////////////////////////////////////////////////////////////////////////////////////
 XApplication::XApplication(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow){
 	hInstance_ = hInstance;
 	hPrevInstance_ = hPrevInstance;
@@ -9,6 +10,7 @@ XApplication::XApplication(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR l
 	nCmdShow_ = nCmdShow;
 }
 
+///////////////////////////////////////////////////////////////////////////////////////////////////
 XAPI XResult_t main_t(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow){
 	// Neue Instanz der Anwendung erstellen
 	g_pApplication = new XApplication(hInstance, hPrevInstance, lpCmdLine, nCmdShow);

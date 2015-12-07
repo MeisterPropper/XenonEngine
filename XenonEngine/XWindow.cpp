@@ -1,24 +1,26 @@
 #include "XWindow.hpp"
 #include "XApplication.hpp"
 
+///////////////////////////////////////////////////////////////////////////////////////////////////
 XWindow::XWindow(){
 	// Fensterklasse erstellen
 	classEx_ = nullptr;
 	createWindowClass(classEx_);
 
 	// Position und Größe des Fensters eintragen
-	xpos_ = static_cast<XUint16_t>(CW_USEDEFAULT);
-	ypos_ = static_cast<XUint16_t>(CW_USEDEFAULT);
-	width_ = 800;
-	height_ = 600;
+	position_.x = static_cast<XUint32_t>(CW_USEDEFAULT);
+	position_.y = static_cast<XUint32_t>(CW_USEDEFAULT);
+	size_.x = 800;
+	size_.y = 600;
 
 	// Fenster erstellen
 	handle_ = nullptr;
-	createWindowHandle(handle_, xpos_, ypos_, width_, height_, this);
+	createWindowHandle(handle_, position_.x, position_.y, size_.x, size_.y, this);
 
 	isOpen_ = true;
 }
 
+///////////////////////////////////////////////////////////////////////////////////////////////////
 XWindow::XWindow(XWindow & window){
 	// Werte übernehmen
 	classEx_ = new WNDCLASSEX(*window.classEx_);
@@ -51,36 +53,57 @@ XWindow::XWindow(XWindow & window){
 	isOpen_ = true;
 }
 
+///////////////////////////////////////////////////////////////////////////////////////////////////
 XWindow::XWindow(XUint16_t xpos, XUint16_t ypos, XUint16_t width, XUint16_t height, char * title){
 	// Fensterklasse erstellen
 	classEx_ = nullptr;
 	createWindowClass(classEx_);
 
 	// Position und Größe des Fensters eintragen
-	xpos_ = xpos;
-	ypos_ = ypos;
-	width_ = width;
-	height_ = height;
+	position_.x = xpos;
+	position_.y = ypos;
+	size_.x = width;
+	size_.y = height;
 
 	// Fenster erstellen
 	handle_ = nullptr;
-	createWindowHandle(handle_, xpos_, ypos_, width_, height_, this);
+	createWindowHandle(handle_, position_.x, position_.y, size_.x, size_.y, this);
 
 	isOpen_ = true;
 }
 
+///////////////////////////////////////////////////////////////////////////////////////////////////
+XWindow::XWindow(XVector2u position, XVector2u size, char * title){
+	// Fensterklasse erstellen
+	classEx_ = nullptr;
+	createWindowClass(classEx_);
+
+	// Position und Größe des Fensters eintragen
+	position_ = position;
+	size_ = size;
+
+	// Fenster erstellen
+	handle_ = nullptr;
+	createWindowHandle(handle_, position_.x, position_.y, size_.x, size_.y, this);
+
+	isOpen_ = true;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
 XWindow::~XWindow(){
 	// Zerstören des Fensters
 	DestroyWindow(handle_);
 }
 
-void XWindow::show(){
+///////////////////////////////////////////////////////////////////////////////////////////////////
+XAPI void XWindow::show(){
 	// Zeigt das Fenster
 	ShowWindow(handle_, g_pApplication->getCmdShow());
 	// Updated das Fenster
 	UpdateWindow(handle_);
 }
 
+///////////////////////////////////////////////////////////////////////////////////////////////////
 XAPI void XWindow::close(){
 	// Das Fenster ist nicht mehr offen
 	isOpen_ = false;
@@ -88,6 +111,7 @@ XAPI void XWindow::close(){
 	DestroyWindow(handle_);
 }
 
+///////////////////////////////////////////////////////////////////////////////////////////////////
 XAPI void XWindow::processMessages(){
 	// Bearbeiten der letzten Nachricht
 	GetMessage(&message_, handle_, 0, 0);
@@ -95,6 +119,7 @@ XAPI void XWindow::processMessages(){
 	DispatchMessage(&message_);
 }
 
+///////////////////////////////////////////////////////////////////////////////////////////////////
 XAPI LRESULT XWindow::processEvents(UINT message, WPARAM wParam, LPARAM lParam){
 	switch (message) {
 	case WM_CLOSE: {
@@ -107,6 +132,7 @@ XAPI LRESULT XWindow::processEvents(UINT message, WPARAM wParam, LPARAM lParam){
 	return LRESULT(0);
 }
 
+///////////////////////////////////////////////////////////////////////////////////////////////////
 LRESULT XWindow::callBack(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
 	// Wenn das Fenster erstellt wird, das Handle mit dem Fenster (XWindow) verknüpfen
@@ -139,6 +165,7 @@ LRESULT XWindow::callBack(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 	return LRESULT(0);
 }
 
+///////////////////////////////////////////////////////////////////////////////////////////////////
 XAPI XResult_t createWindowClass(WNDCLASSEX *& wndclass){
 	// Neue WindowClass erstellen
 	wndclass = new WNDCLASSEX();
@@ -171,6 +198,7 @@ XAPI XResult_t createWindowClass(WNDCLASSEX *& wndclass){
 	return XResult_t(0);
 }
 
+///////////////////////////////////////////////////////////////////////////////////////////////////
 XAPI XResult_t createWindowHandle(HWND & hWnd, XUint16_t xpos, XUint16_t ypos, XUint16_t width, XUint16_t height, XWindow * window){
 	// Fenster erstellen
 	hWnd = CreateWindowEx(WS_EX_CLIENTEDGE,

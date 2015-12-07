@@ -47,10 +47,13 @@ public:
 	XAPI int		getCmdShow()		{ return nCmdShow_; }
 
 private:
-	HINSTANCE		hInstance_;
-	HINSTANCE		hPrevInstance_;
-	LPSTR			lpCmdLine_;
-	int				nCmdShow_;
+	////////////////////////////////////////////////////////////
+	/// Member
+	////////////////////////////////////////////////////////////
+	HINSTANCE		hInstance_;		// Instanz	
+	HINSTANCE		hPrevInstance_;	// Vorgängerinstanz
+	LPSTR			lpCmdLine_;		// Kommandozeile
+	int				nCmdShow_;		// 
 };
 
 extern XApplication * g_pApplication;

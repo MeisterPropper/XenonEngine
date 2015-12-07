@@ -25,6 +25,7 @@
 #include <Windows.h>
 
 #include "xeTypes.hpp"
+#include "XVector2.hpp"
 
 class XWindow {
 public:
@@ -56,6 +57,17 @@ public:
 	/// @title	- Titel des Fensters
 	////////////////////////////////////////////////////////////
 	XAPI XWindow(XUint16_t xpos, XUint16_t ypos, XUint16_t width, XUint16_t height, char* title);
+
+	////////////////////////////////////////////////////////////
+	/// Konstruktor
+	///
+	/// Erstellt ein neues Fenster mit den übergebenen Werten
+	///
+	/// @position	- Vector, der die Position des Fensters angibt
+	/// @size		- Vector, der die Größe des Fensters angibt
+	/// @title		- Titel des Fensters
+	////////////////////////////////////////////////////////////
+	XAPI XWindow(XVector2u position, XVector2u size, char* title);
 
 	////////////////////////////////////////////////////////////
 	/// Destruktor
@@ -93,21 +105,24 @@ public:
 	XAPI void processMessages();
 	
 private:
+	////////////////////////////////////////////////////////////
+	/// Member
+	////////////////////////////////////////////////////////////
 	WNDCLASSEX*	classEx_;	// Fensterklasse
 	HWND		handle_;	// Fensterhandle
 	MSG			message_;	// Nachrichten
 
-	XUint16_t xpos_;
-	XUint16_t ypos_;
-	XUint16_t width_;
-	XUint16_t height_;
+	XVector2u position_;	// Position des Fensters
+	XVector2u size_;		// Größe des Fensters
 
-	XBool_t	  isOpen_;
+	XBool_t	  isOpen_;		// 
+
+	////////////////////////////////////////////////////////////
+	/// Private Methoden
+	////////////////////////////////////////////////////////////
 
 	// Callback
 	static LRESULT CALLBACK callBack(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
-
-	friend XAPI XResult_t createWindowClass(WNDCLASSEX*& wndclass);
 
 	////////////////////////////////////////////////////////////
 	/// processEvents()
@@ -119,6 +134,11 @@ private:
 	/// @lParam  - LPARAM
 	////////////////////////////////////////////////////////////
 	XAPI LRESULT processEvents(UINT message, WPARAM wParam, LPARAM lParam);
+
+	////////////////////////////////////////////////////////////
+	/// Friends
+	////////////////////////////////////////////////////////////
+	friend XAPI XResult_t createWindowClass(WNDCLASSEX*& wndclass);
 };
 
 
