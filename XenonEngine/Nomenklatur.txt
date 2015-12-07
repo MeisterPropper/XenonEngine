@@ -1,0 +1,18 @@
+Nomenklatur aller Elemten der XenonEngine
+
+1.0 Klassen
+	- Klassen beginnen mit einem großen X gefolgt vom Namen (bsp. XCore)
+	- Header- und Quelldateien von Klassen werden wie die Klasse geschrieben (bsp. Klasse: XCore, Datei: XCore.hpp)
+	- Interfaces beginnen mit einem großen XI gefolgt vom Namen (bsp. XITexture)
+	- Header- und Quelldateien von Interfaces werden wie das Interface geschrieben (bsp. Interface: XITexture, Datei: XITexture.hpp)
+	- Structs beginnen mit einem großen XS gefolgt vom Namen (bsp. XSInitData)
+	- Header- und Quelldateien von Structs werden wie die Struktur geschrieben (bsp. Struktur: XSInitData, Datei: XSInitData.hpp)
+	1.1 Member
+		- Private Member beginnen mit m_ gefolgt von einem Kürzel des Types gefolgt vom Namen der Camelnotation folgend (bsp. m_bIsRunning)
+		- Öffentliche Member beginnen mit _ gefolgt von einem Kürzel des Types gefolgt vom Namen der Camelnotation folgend (bsp _bIsActiv)
+	1.2 Methoden
+		- Öffentliche Methoden folgen der Camelnotation mit dem ersten Teil des Namens kleingeschrieben (bsp. initEventHandler)
+		- Private Methoden beginnen mit p_ und folgen der Camelnotation mit dem ersten Teil des Namens kleingeschrieben (bsp. p_processTransform)
+2.0 Makros
+	- Makros beginnen mit X_ gefolgt vom großgeschriebenen Namen. Einzelne Wörter werden mit _ getrennt (bsp. X_BUFFER_MAX)
+
